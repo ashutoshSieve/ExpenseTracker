@@ -7,7 +7,7 @@ const passport=require("passport");
 passport.use(new GoogleStrategy({
     clientID: process.env.ID,
     clientSecret: process.env.SECRET,
-    callbackURL: "http://localhost:3000/auth/callback"
+    callbackURL: "https://expensetracker-93re.onrender.com/"
   },
   function(accessToken, refreshToken, profile, cb) {
     UserModel.findOne({google_id: profile.id }).then(user => {
