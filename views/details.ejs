@@ -176,7 +176,7 @@
     <!-- Expense Details -->
     <div class="container expense-container mt-4">
         <h2 class="text-center">Expense Details</h2>
-
+    
         <!-- Weekly Expenses Card -->
         <div class="card my-3 p-3">
             <h3 class="card-title text-center"><i class="fas fa-calendar-week"></i> Weekly Expenses</h3>
@@ -184,6 +184,7 @@
                 <table class="table table-striped text-center mt-3">
                     <thead>
                         <tr>
+                            <th>Date</th>
                             <th>Item Name</th>
                             <th>Price (₹)</th>
                         </tr>
@@ -191,7 +192,8 @@
                     <tbody>
                         <% weeklyItems.forEach(item => { %>
                             <tr>
-                                <td><%= item.name %></td>
+                                <td><%= item.date %></td>
+                                <td><%= item.name %></td> <!-- Fix item name display -->
                                 <td><%= item.price %></td>
                             </tr>
                         <% }) %>
@@ -201,7 +203,7 @@
                 <p class="text-center text-muted">No expenses recorded this week.</p>
             <% } %>
         </div>
-
+    
         <!-- Monthly Expenses Card -->
         <div class="card my-3 p-3">
             <h3 class="card-title text-center"><i class="fas fa-calendar-alt"></i> Monthly Expenses</h3>
@@ -209,6 +211,7 @@
                 <table class="table table-striped text-center mt-3">
                     <thead>
                         <tr>
+                            <th>Date</th>
                             <th>Item Name</th>
                             <th>Price (₹)</th>
                         </tr>
@@ -216,7 +219,8 @@
                     <tbody>
                         <% monthlyItems.forEach(item => { %>
                             <tr>
-                                <td><%= item.name %></td>
+                                <td><%= item.date %></td>
+                                <td><%= item.name %></td> <!-- Fix item name display -->
                                 <td><%= item.price %></td>
                             </tr>
                         <% }) %>
@@ -228,7 +232,7 @@
         </div>
     </div>
     
-
+    
     <!-- Footer -->
     <footer class="footer text-center text-lg-start mt-5">
         <div class="text-center p-3">
