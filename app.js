@@ -81,7 +81,6 @@ app.get("/logout", function(req,res){
     });
 });
 
-// google auth
 
 app.get('/google', passport.authenticate('google', { scope: ['profile'] }));
   
@@ -228,6 +227,52 @@ app.post("/delete", function(req, res) {
         res.render("error", {message: "You are not logged in !!."});
     }
 });
+
+app.get("/details", async function (req, res) {
+    if (req.isAuthenticated()) {
+        try {
+            const user = await User.findById(req.user._id);
+            if (!user) {
+                return res.render("error", { message: "User not found!" });
+            }
+
+            const today = new Date();
+            const last7Days = new Date(today);
+            last7Days.setDate(today.getDate() - 7);
+            const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+            let weeklyItems = [];
+            let monthlyItems = [];
+
+            user.expense.forEach(exp => {
+                let expDate = new Date(exp.title);
+
+                // Weekly Expense Collection (last 7 days)
+                if (expDate >= last7Days && expDate <= today) {
+                    weeklyItems.push(...exp.items); // Collect all items
+                }
+
+                // Monthly Expense Collection (current month)
+                if (expDate >= firstDayOfMonth && expDate <= today) {
+                    monthlyItems.push(...exp.items); // Collect all items
+                }
+            });
+
+            res.render("details", {
+                user: req.user.name,
+                weeklyItems,
+                monthlyItems
+            });
+
+        } catch (err) {
+            console.error(err);
+            res.render("error", { message: "Error fetching expense details." });
+        }
+    } else {
+        res.redirect("/login");
+    }
+});
+
 
 app.listen(process.env.PORT, function(){
     console.log("server is running on port 3000!!");
