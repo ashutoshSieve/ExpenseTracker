@@ -245,16 +245,24 @@ app.get("/details", async function (req, res) {
             let monthlyItems = [];
 
             user.expense.forEach(exp => {
+                // Ensure the title is a valid date
                 let expDate = new Date(exp.title);
-
+            
+                if (isNaN(expDate)) {  // If the conversion fails
+                    let fullDateStr = `${exp.title}, ${today.getFullYear()}`; // Append current year
+                    expDate = new Date(fullDateStr);
+                }
+            
+                console.log("Parsed Date:", expDate);
+            
                 // Weekly Expense Collection (last 7 days)
                 if (expDate >= last7Days && expDate <= today) {
-                    weeklyItems.push(...exp.items); // Collect all items
+                    weeklyItems.push(...exp.items);
                 }
-
+            
                 // Monthly Expense Collection (current month)
                 if (expDate >= firstDayOfMonth && expDate <= today) {
-                    monthlyItems.push(...exp.items); // Collect all items
+                    monthlyItems.push(...exp.items);
                 }
             });
 
