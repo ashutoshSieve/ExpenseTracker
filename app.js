@@ -251,7 +251,7 @@ app.get("/details", async function (req, res) {
 
                 exp.items.forEach(item => {
                     let itemDetails = {
-                        name: item.name, 
+                        name: item.item, 
                         price: item.price,
                         date: exp.title 
                     };
