@@ -249,17 +249,23 @@ app.get("/details", async function (req, res) {
                 let fullDateStr = `${exp.title}, ${today.getFullYear()}`;
                 let expDate = new Date(fullDateStr);
 
-                console.log(`Expense: ${exp.title} -> Parsed Date: ${expDate}`);
+                exp.items.forEach(item => {
+                    let itemDetails = {
+                        name: item.name, 
+                        price: item.price,
+                        date: exp.title 
+                    };
 
-                // Weekly Expense Collection (last 7 days)
-                if (expDate >= last7Days && expDate <= today) {
-                    weeklyItems.push(...exp.items);
-                }
+                    // Weekly Expense Collection (last 7 days)
+                    if (expDate >= last7Days && expDate <= today) {
+                        weeklyItems.push(itemDetails);
+                    }
 
-                // Monthly Expense Collection (current month)
-                if (expDate >= firstDayOfMonth && expDate <= today) {
-                    monthlyItems.push(...exp.items);
-                }
+                    // Monthly Expense Collection (current month)
+                    if (expDate >= firstDayOfMonth && expDate <= today) {
+                        monthlyItems.push(itemDetails);
+                    }
+                });
             });
 
             res.render("details", {
@@ -276,7 +282,6 @@ app.get("/details", async function (req, res) {
         res.redirect("/login");
     }
 });
-
 
 
 app.listen(process.env.PORT, function(){
