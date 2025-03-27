@@ -108,7 +108,7 @@ app.get("/updatedTrack", function(req,res){
                         date: req.session.title,
                         content: result.expense.find(exp => exp.title === req.session.title).items,
                         user: req.user.name,
-                        data: price // Pass the resolved price data
+                        data: price 
                     });
                 });
             }else{
@@ -136,11 +136,10 @@ app.post("/register", function(req,res){
             });
             
             newUser.save().then(() => {
-                // Log in the user immediately after signup
                 req.login(newUser, (err) => {
                     if (err) {
                         console.log(err);
-                        return res.redirect("/"); // Handle the error appropriately
+                        return res.redirect("/"); 
                     }
                     res.redirect("/track");
                 });
@@ -171,7 +170,6 @@ app.post("/addItems", function(req, res) {
         if (expense) {
             expense.items.push({ item: item, price: price });
         } else {
-            // Add a new expense entry with title and item
             req.user.expense.push({
                 title: expenseTitle,
                 items: [{ item: item, price: price }]
@@ -194,7 +192,6 @@ app.post("/search", function(req, res) {
         const expenseFound = req.user.expense.find(expense => expense.title === dateToFind);
 
         if (expenseFound) {
-            // Redirect to the tracker page with the found expense
             req.session.title=expenseFound.title;
             res.redirect("/updatedTrack");
         }else{
@@ -245,7 +242,6 @@ app.get("/details", async function (req, res) {
             let monthlyItems = [];
 
             user.expense.forEach(exp => {
-                // Convert "Monday, March 10" into a valid date
                 let fullDateStr = `${exp.title}, ${today.getFullYear()}`;
                 let expDate = new Date(fullDateStr);
 
@@ -256,12 +252,10 @@ app.get("/details", async function (req, res) {
                         date: exp.title 
                     };
 
-                    // Weekly Expense Collection (last 7 days)
                     if (expDate >= last7Days && expDate <= today) {
                         weeklyItems.push(itemDetails);
                     }
 
-                    // Monthly Expense Collection (current month)
                     if (expDate >= firstDayOfMonth && expDate <= today) {
                         monthlyItems.push(itemDetails);
                     }
