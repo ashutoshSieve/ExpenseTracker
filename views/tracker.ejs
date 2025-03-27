@@ -46,7 +46,6 @@
             max-width: 300px;
         }
 
-        /* Custom styles for form and display */
         .input-form {
             display: flex;
             align-items: center;
@@ -79,7 +78,6 @@
             margin-top: 20px;
         }
 
-        /* Increased font size for item display */
         .display-items p {
             font-size: 1.2rem;
             margin-bottom: 10px;
@@ -121,12 +119,12 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: 20px; /* Separation between Total Expand and Display Items */
+                margin-top: 20px; 
             }
 
             .total-price-container {
                 text-align: center;
-                margin-top: 40px; /* More margin between Total Expand and Display Items */
+                margin-top: 40px;
             }
         }
 
@@ -190,12 +188,11 @@
             </div>
         </div>
 
-        <!-- Centered Container -->
+        
         <div class="row mt-4 form-container">
             <div class="col-md-5">
                 <h5 class="text-center">Add Item</h5>
 
-                <!-- Populate the form with item and price values if available -->
                 <form class="input-form" action="/additems" method="post">
                     <input type="text" class="form-control form-input" placeholder="Item Name" aria-label="Item Name" name="item" value="<%= typeof ele !== 'undefined' ? ele.item : '' %>" required>
                     <input type="text" class="form-control form-input" placeholder="Price ₹" aria-label="Price" name="price" value="<%= typeof ele !== 'undefined' ? ele.price : '' %>" required>
