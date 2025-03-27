@@ -43,10 +43,3 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-
-// id
-// 1064639780579-e5nvl4i6vh2bhbjhgks9vm27uunagv9d.apps.googleusercontent.com
-
-
-// secret 
-// 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
