@@ -17,7 +17,6 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, passw
 
 }));
 
-// Serialize and deserialize user for session support
 passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
