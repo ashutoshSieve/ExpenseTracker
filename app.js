@@ -9,7 +9,7 @@ const cors = require('cors');
 const app = express();
 // app.use(cors());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://visionary-malabi-c61b3f.netlify.app',
   methods: ["GET", "POST", "DELETE"],
   credentials: true
 }));
@@ -771,4 +771,5 @@ app.get('/health', (_req, res) => res.json({ ok: true, now: new Date() }));
 
 /* ------------------------------- Startup ----------------------------- */
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
